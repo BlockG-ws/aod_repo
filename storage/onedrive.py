@@ -75,7 +75,7 @@ class OneDrive:
         if self.tenant_id:
             token_url = "https://login.microsoftonline.com/" + self.tenant_id +"/oauth2/v2.0/token"
         else:
-            token_url = https://login.microsoftonline.com/common/oauth2/v2.0/token
+            token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
         r = requests.post(
             token_url,
             data={
