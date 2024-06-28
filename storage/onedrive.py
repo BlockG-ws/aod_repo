@@ -20,9 +20,11 @@ class OneDrive:
         code: str,
         refresh_token: str,
         path: str,
+        tenant_id: str,
     ):
         self.client_id = cliend_id
         self.client_secret = client_secret
+        self.tenant_id = tenant_id
         self.code = code
         self.refresh_token = refresh_token
         self.path = path
