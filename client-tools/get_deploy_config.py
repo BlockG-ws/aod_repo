@@ -9,13 +9,13 @@ if TENANT_ID:
     token_url = "https://login.microsoftonline.com/"+ TENANT_ID +"/oauth2/v2.0/token"
 else:
     auth_url =  "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id="
-    token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token
+    token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 
 
 def get_code() -> str:
     scope = "offline_access Files.Read.All profile openid"
     url = (
-        "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id="
+        auth_url
         + CLITENT_ID
         + "&response_type=code&redirect_uri=http://localhost&response_mode=query&scope="
         + quote(scope)
@@ -40,7 +40,7 @@ def get_code() -> str:
 
 
 def get_refresh_token(code: str) -> str:
-    url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+    url = token_url
     headers = {
         "Content-Type": "application/x-www-form-urlencoded",
     }
