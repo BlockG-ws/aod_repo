@@ -72,8 +72,8 @@ class OneDrive:
         header = {
             "Content-Type": "application/x-www-form-urlencoded",
         }
-        if tenant_id:
-            token_url = "https://login.microsoftonline.com/" + tenant_id +"/oauth2/v2.0/token"
+        if self.tenant_id:
+            token_url = "https://login.microsoftonline.com/" + self.tenant_id +"/oauth2/v2.0/token"
         else:
             token_url = https://login.microsoftonline.com/common/oauth2/v2.0/token
         r = requests.post(
