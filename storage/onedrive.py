@@ -76,14 +76,8 @@ class OneDrive:
         header = {
             "Content-Type": "application/x-www-form-urlencoded",
         }
-        if os.environ.get("TENANT_ID"):
-            tenant_id = os.environ.get("TENANT_ID")
-        else:
-            with open(os.path.normpath(os.path.join(os.path.dirname(__file__), "../auth.json")), "r") as f:
-                config = json.load(f)
-                tenant_id = config.get("tenant_id")
-        if tenant_id:
-            token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+        if self.tenant_id:
+            token_url = f"https://login.microsoftonline.com/{self.tenant_id}/oauth2/v2.0/token"
         else:
             token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
         r = requests.post(
