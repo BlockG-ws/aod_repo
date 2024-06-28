@@ -1,8 +1,15 @@
 #!/usr/bin/python3
 
 from urllib.parse import parse_qsl, quote, urlsplit
-from config import CLITENT_ID, CLITENT_SECRET
+from config import CLITENT_ID, CLITENT_SECRET, TENANT_ID
 import requests
+
+if TENANT_ID:
+    auth_url = "https://login.microsoftonline.com/"+ TENANT_ID +"/oauth2/v2.0/authorize?client_id="
+    token_url = "https://login.microsoftonline.com/"+ TENANT_ID +"/oauth2/v2.0/token"
+else:
+    auth_url =  "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id="
+    token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token
 
 
 def get_code() -> str:
