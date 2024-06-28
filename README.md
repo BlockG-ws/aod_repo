@@ -8,4 +8,4 @@ urepo is a project that can create your Linux software repository, include  Arch
 ### Vercel
 Just click the button below. You need to fill in some environment variables.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBlockG-ws%2Faod_repo&env=code,path,client_secret,client_id,refresh_token)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBlockG-ws%2Faod_repo&env=code,path,client_secret,client_id,refresh_token,tenant_id)
