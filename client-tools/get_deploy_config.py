@@ -5,21 +5,21 @@ from config import CLITENT_ID, CLITENT_SECRET, TENANT_ID
 import requests
 
 if TENANT_ID:
-    auth_url = "https://login.microsoftonline.com/"+ TENANT_ID +"/oauth2/v2.0/authorize?client_id="
-    token_url = "https://login.microsoftonline.com/"+ TENANT_ID +"/oauth2/v2.0/token"
+    auth_url = "https://login.microsoftonline.com/" + TENANT_ID + "/oauth2/v2.0/authorize?client_id="
+    token_url = "https://login.microsoftonline.com/" + TENANT_ID + "/oauth2/v2.0/token"
 else:
-    auth_url =  "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id="
+    auth_url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id="
     token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 
 
 def get_code() -> str:
     scope = "offline_access Files.Read.All profile openid"
     url = (
-        auth_url
-        + CLITENT_ID
-        + "&response_type=code&redirect_uri=http://localhost&response_mode=query&scope="
-        + quote(scope)
-        + "&state=200"
+            auth_url
+            + CLITENT_ID
+            + "&response_type=code&redirect_uri=http://localhost&response_mode=query&scope="
+            + quote(scope)
+            + "&state=200"
     )
 
     print("请在浏览器打开下面的链接进行授权，完成后把跳转到的以 localhost 为开头的地址粘贴下来并按回车")

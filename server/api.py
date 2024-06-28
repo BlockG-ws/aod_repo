@@ -5,7 +5,6 @@ from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from storage.onedrive import OneDrive
 
-
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(funcName)s(): %(message)s",
     datefmt="%Y-%m-%d %H:%M",

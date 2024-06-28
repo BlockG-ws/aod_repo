@@ -1,3 +1,5 @@
+import os
+
 import requests
 import json
 from os.path import join as pathjoin
@@ -15,14 +17,14 @@ class FileInfo(NamedTuple):
 class OneDrive:
     def __init__(
         self,
-        cliend_id: str,
+        client_id: str,
         client_secret: str,
+        tenant_id: str,
         code: str,
         refresh_token: str,
         path: str,
-        tenant_id: str,
     ):
-        self.client_id = cliend_id
+        self.client_id = client_id
         self.client_secret = client_secret
         self.tenant_id = tenant_id
         self.code = code
@@ -33,6 +35,8 @@ class OneDrive:
         self.access_token = ""
 
         self.refresh()
+
+
 
     @staticmethod
     def init_from_dict(key_val: dict) -> "OneDrive":
@@ -72,8 +76,14 @@ class OneDrive:
         header = {
             "Content-Type": "application/x-www-form-urlencoded",
         }
-        if self.tenant_id:
-            token_url = "https://login.microsoftonline.com/" + self.tenant_id +"/oauth2/v2.0/token"
+        if os.environ.get("TENANT_ID"):
+            tenant_id = os.environ.get("TENANT_ID")
+        else:
+            with open(os.path.normpath(os.path.join(os.path.dirname(__file__), "../auth.json")), "r") as f:
+                config = json.load(f)
+                tenant_id = config.get("tenant_id")
+        if tenant_id:
+            token_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
         else:
             token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
         r = requests.post(
