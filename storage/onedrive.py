@@ -36,11 +36,12 @@ class OneDrive:
     def init_from_dict(key_val: dict) -> "OneDrive":
         client_id = key_val["client_id"]
         client_secret = key_val["client_secret"]
+        tenant_id = key_val["tenant_id"]
         code = key_val["code"]
         refresh_token = key_val["refresh_token"]
         path = key_val["path"]
 
-        return OneDrive(client_id, client_secret, code, refresh_token, path)
+        return OneDrive(client_id, client_secret, tenant_id, code, refresh_token, path)
 
     @staticmethod
     def init_from_json(config_path: str) -> "OneDrive":
@@ -69,8 +70,12 @@ class OneDrive:
         header = {
             "Content-Type": "application/x-www-form-urlencoded",
         }
+        if tenant_id:
+            token_url = "https://login.microsoftonline.com/" + tenant_id +"/oauth2/v2.0/token"
+        else:
+            token_url = https://login.microsoftonline.com/common/oauth2/v2.0/token
         r = requests.post(
-            "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+            token_url,
             data={
                 "client_id": self.client_id,
                 "redirect_uri": "http://localhost",
