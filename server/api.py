@@ -40,7 +40,7 @@ async def list_or_get_file(request: Request, file_path: str):
     elif is_folder is True:
         file_info_list = onedrive.ls_folder(file_path)
         if file_info_list is None:
-            return HTTPException(404, f"Folder {file_path} not found.")
+            return HTTPException(404, f"Can't get the contents within {file_path}, maybe your path is configured incorrectly.(like '/' in the end of your path?)")
         file_info_list = [i._asdict() for i in file_info_list]
         return templates.TemplateResponse(
             "index.html",
