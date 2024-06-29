@@ -143,7 +143,11 @@ class OneDrive:
 
     @_try_refresh
     def ls_folder(self, path: str) -> Optional[list]:
-        onedrive_path = pathjoin(self.path, path)
+        if path:
+            onedrive_path = pathjoin(self.path, path)
+        else:
+            onedrive_path = self.path
+
         if not onedrive_path:
             url = "https://graph.microsoft.com/v1.0/me/drive/root/children"
         else:
